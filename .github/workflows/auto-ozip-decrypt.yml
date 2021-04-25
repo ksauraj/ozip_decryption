@@ -1,0 +1,47 @@
+name: OZIP Decrypter by TechyMinati... & Tweaked by sauraj
+
+on:
+#  release:
+#    types: [published]
+#  push:
+#    branches:
+#      - master
+#    paths:
+#      - '.config'
+#  schedule:
+#    - cron: 0 8 * * 5
+  watch:
+    types: [started]
+
+env:
+  FIRMWARE_LINK: https://download.c.realme.com/osupdate/RMX2151PU_11_OTA_0870_all_bcaVDKpnb64B.ozip #edit link here
+  FIRMWARE_NAME: RMX2151PU_11_OTA_0870_all_bcaVDKpnb64B.ozip  #edit file name here
+  TZ: Asia/Kolkata
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@master
+         
+       - name: Downloading Ozip Now.. 
+         run: |
+            sudo -E apt-get -qq update
+            sudo apt install aria2
+            aria2c $FIRMWARE_LINK
+             
+       - name: Decrypting Ozip Now
+         run: |
+             sudo -E apt-get -qq update
+             sudo apt-get install python-pip
+             sudo -H pip install --upgrade pip
+             sudo -H pip install setuptools wheel docopt pycryptodome
+             wget https://raw.githubusercontent.com/techyminati/oppo_ozip_decrypt/master/ozipdecrypt.py
+             sudo python ozipdecrypt.py $FIRMWARE_NAME
+             zip -r RMX2151PU_11_OTA_0870_all_bcaVDKpnb64B.zip out #edit this filename 
+             
+       - name: Upload Decrypted Zip
+         run: |
+             curl https://bashupload.com/ -T *.zip
