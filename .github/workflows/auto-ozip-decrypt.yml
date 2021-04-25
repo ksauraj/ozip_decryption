@@ -14,8 +14,8 @@ on:
     types: [started]
 
 env:
-  FIRMWARE_LINK: https://download.c.realme.com/osupdate/RMX2151PU_11_OTA_0870_all_bcaVDKpnb64B.ozip #edit link here
-  FIRMWARE_NAME: RMX2151PU_11_OTA_0870_all_bcaVDKpnb64B.ozip  #edit file name here
+  FIRMWARE_LINK: https://download.c.realme.com/osupdate/RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.ozip #edit link here
+  FIRMWARE_NAME: RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.ozip  #edit file name here
   TZ: Asia/Kolkata
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
              sudo -H pip install setuptools wheel docopt pycryptodome
              wget https://raw.githubusercontent.com/techyminati/oppo_ozip_decrypt/master/ozipdecrypt.py
              sudo python ozipdecrypt.py $FIRMWARE_NAME
-             zip -r RMX2151PU_11_OTA_0870_all_bcaVDKpnb64B.zip out #edit this filename 
+             zip -r RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.zip out #edit this filename 
              
        - name: Upload Decrypted Zip
          run: |
