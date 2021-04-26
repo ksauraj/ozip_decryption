@@ -16,6 +16,7 @@ on:
 env:
   FIRMWARE_LINK: https://download.c.realme.com/osupdate/RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.ozip #edit link here...
   FIRMWARE_NAME: RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.ozip  #edit file name here, you can find the name of file from link itself...
+  FINAL_ZIP_NAME: THE_NAME_OF_ZIP_YOU_WANT.zip #This will be the name of final zip which will be uploaded. You can leave it unchanged.
   TZ: Asia/Kolkata
 
 jobs:
@@ -44,9 +45,9 @@ jobs:
        - name: ziping decrypted file
          run: |
              cd out
-             sudo zip -r The_name_of_zip_you_want.zip * #edit this filename, or leave it unchanged.
+             sudo zip -r $FINAL_ZIP_NAME * #Don't edit it. Don't edit it and Don't edit this line.
 
        - name: Upload Decrypted zip
          run: |
              cd out
-             curl https://bashupload.com/ -T *.zip #file will be uploaded to bashupload, so mirror it if you are decrypting for community uses.
+             curl https://bashupload.com/ -T $FINAL_ZIP_NAME #file will be uploaded to bashupload, so mirror it if you are decrypting for community uses.
