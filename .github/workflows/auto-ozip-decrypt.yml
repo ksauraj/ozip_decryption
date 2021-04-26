@@ -14,8 +14,8 @@ on:
     types: [started]
 
 env:
-  FIRMWARE_LINK: https://download.c.realme.com/osupdate/RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.ozip #edit link here
-  FIRMWARE_NAME: RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.ozip  #edit file name here
+  FIRMWARE_LINK: https://download.c.realme.com/osupdate/RMX2151PU_11_OTA_0830_all_AFFrwZpAzh0Z.ozip #edit link here...
+  FIRMWARE_NAME: RMX2151PU_11_OTA_0830_all_AFFrwZpAzh0Z.ozip  #edit file name here, you can find the name of file from link itself...
   TZ: Asia/Kolkata
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
        - name: Checkout
          uses: actions/checkout@master
          
-       - name: Downloading Ozip Now.. 
+       - name: Downloading Ozip Now
          run: |
             sudo -E apt-get -qq update
             sudo apt install aria2
@@ -40,8 +40,13 @@ jobs:
              sudo -H pip install setuptools wheel docopt pycryptodome
              wget https://raw.githubusercontent.com/techyminati/oppo_ozip_decrypt/master/ozipdecrypt.py
              sudo python ozipdecrypt.py $FIRMWARE_NAME
-             zip -r RMX2151PU_11_OTA_0710_all_ybwVKLp8S7lZ.zip out #edit this filename 
-             
-       - name: Upload Decrypted Zip
+
+       - name: ziping decrypted file
          run: |
-             curl https://bashupload.com/ -T *.zip
+             cd out
+             sudo zip -r The_name_of_zip_you_want.zip * #edit this filename, or leave it unchanged.
+
+       - name: Upload Decrypted zip
+         run: |
+             cd out
+             curl https://bashupload.com/ -T *.zip #file will be uploaded to bashupload, so mirror it if you are decrypting for community uses.
