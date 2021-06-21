@@ -45,7 +45,7 @@ jobs:
        - name: Upload Decrypted zip if AES keys not found.
          continue-on-error: true
          run: |
-             curl https://bashupload.com/ -T $FINAL_ZIP_NAME #file will be uploaded to bashupload, so mirror it if you are decrypting for community uses
+             curl https://bashupload.com/ -T *.zip #file will be uploaded to bashupload, so mirror it if you are decrypting for community uses
 
 
        - name: ziping decrypted file if needed.
