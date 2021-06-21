@@ -41,13 +41,16 @@ jobs:
              sudo -H pip install setuptools wheel docopt pycryptodome
              wget https://raw.githubusercontent.com/techyminati/oppo_ozip_decrypt/master/ozipdecrypt.py
              sudo python ozipdecrypt.py $FIRMWARE_NAME
+             pwd && ls 
 
        - name: ziping decrypted file
          run: |
              cd out
              sudo zip -r $FINAL_ZIP_NAME * #Don't edit it. Don't edit it and Don't edit this line.
+             pwd && ls
 
        - name: Upload Decrypted zip
          run: |
+             pwd && ls
              cd out
              curl https://bashupload.com/ -T $FINAL_ZIP_NAME #file will be uploaded to bashupload, so mirror it if you are decrypting for community uses.
